@@ -7,11 +7,6 @@ public class HeadDatabaseModifier extends ExterHeadModifier {
     private final HeadDatabaseAPI headDatabaseAPI = new HeadDatabaseAPI();
 
     @Override
-    public String getName() {
-        return "head-database";
-    }
-
-    @Override
     protected ItemStack getHead(String id) {
         return headDatabaseAPI.getItemHead(id);
     }
