@@ -11,8 +11,8 @@ public final class ExterHeads implements Expansion {
             ItemModifierBuilder.INSTANCE.register(HeadDatabaseModifier::new, "head-database", "head-db", "hdb");
         }
         if (Bukkit.getPluginManager().isPluginEnabled("HeadDB")) {
-            ItemModifierBuilder.INSTANCE.register(TSPHeadIdModifier::new, "tsphead-id");
-            ItemModifierBuilder.INSTANCE.register(TSPHeadNameModifier::new, "tsphead-name");
+            ItemModifierBuilder.INSTANCE.register(TSPHeadIdModifier::new, "tsp-head");
+            ItemModifierBuilder.INSTANCE.register(TSPHeadNameModifier::new, "tsp-head-name");
         }
     }
 }
