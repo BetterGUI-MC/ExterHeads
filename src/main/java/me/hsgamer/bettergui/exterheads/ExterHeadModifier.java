@@ -5,6 +5,7 @@ import me.hsgamer.hscore.minecraft.item.ItemComparator;
 import me.hsgamer.hscore.minecraft.item.ItemModifier;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -12,14 +13,14 @@ import java.util.UUID;
 public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, ItemComparator<ItemStack> {
     private String name = "";
 
-    protected abstract ItemStack getHead(String id);
+    protected abstract ItemStack getHead(@Nullable UUID uuid, String id);
 
-    protected abstract String getHeadId(ItemStack itemStack);
+    protected abstract String getHeadId(@Nullable UUID uuid, ItemStack itemStack);
 
     @Override
     public @NotNull ItemStack modify(@NotNull ItemStack original, UUID uuid, @NotNull Collection<StringReplacer> stringReplacers) {
         String replaced = StringReplacer.replace(name, uuid, stringReplacers);
-        ItemStack newItemStack = getHead(replaced);
+        ItemStack newItemStack = getHead(uuid, replaced);
         return newItemStack == null ? original : newItemStack;
     }
 
@@ -35,7 +36,7 @@ public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, Item
 
     @Override
     public boolean loadFromItem(ItemStack itemStack) {
-        String id = getHeadId(itemStack);
+        String id = getHeadId(null, itemStack);
         if (id != null) {
             this.name = id;
             return true;
@@ -47,7 +48,7 @@ public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, Item
     @Override
     public boolean compare(@NotNull ItemStack itemStack, UUID uuid, @NotNull Collection<StringReplacer> stringReplacers) {
         String replaced = StringReplacer.replace(name, uuid, stringReplacers);
-        String headId = getHeadId(itemStack);
+        String headId = getHeadId(uuid, itemStack);
         return headId != null && headId.equals(replaced);
     }
 }
