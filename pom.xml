@@ -42,7 +42,7 @@
     <dependency>
       <groupId>com.github.TheSilentPro</groupId>
       <artifactId>HeadDB</artifactId>
-      <version>5.0.0-rc.10</version>
+      <version>5.0.0-rc.11</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
