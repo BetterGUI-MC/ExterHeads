@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.UUID;
 
 public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, ItemComparator<ItemStack> {
@@ -18,8 +17,8 @@ public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, Item
     protected abstract String getHeadId(@Nullable UUID uuid, ItemStack itemStack);
 
     @Override
-    public @NotNull ItemStack modify(@NotNull ItemStack original, UUID uuid, @NotNull Collection<StringReplacer> stringReplacers) {
-        String replaced = StringReplacer.replace(name, uuid, stringReplacers);
+    public @NotNull ItemStack modify(@NotNull ItemStack original, UUID uuid, @NotNull StringReplacer stringReplacer) {
+        String replaced = stringReplacer.replaceOrOriginal(name, uuid);
         ItemStack newItemStack = getHead(uuid, replaced);
         return newItemStack == null ? original : newItemStack;
     }
@@ -46,8 +45,8 @@ public abstract class ExterHeadModifier implements ItemModifier<ItemStack>, Item
     }
 
     @Override
-    public boolean compare(@NotNull ItemStack itemStack, UUID uuid, @NotNull Collection<StringReplacer> stringReplacers) {
-        String replaced = StringReplacer.replace(name, uuid, stringReplacers);
+    public boolean compare(@NotNull ItemStack itemStack, UUID uuid, @NotNull StringReplacer stringReplacer) {
+        String replaced = stringReplacer.replaceOrOriginal(name, uuid);
         String headId = getHeadId(uuid, itemStack);
         return headId != null && headId.equals(replaced);
     }
