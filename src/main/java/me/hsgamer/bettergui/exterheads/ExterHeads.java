@@ -14,5 +14,11 @@ public final class ExterHeads implements Expansion {
             ItemModifierBuilder.INSTANCE.register(TSPHeadIdModifier::new, "tsp-head");
             ItemModifierBuilder.INSTANCE.register(TSPHeadNameModifier::new, "tsp-head-name");
         }
+        if (Bukkit.getPluginManager().isPluginEnabled("zHead")) {
+            ItemModifierBuilder.INSTANCE.register(zHeadModifier::new, "zhead");
+        }
+        if (Bukkit.getPluginManager().isPluginEnabled("Skulls")) {
+            ItemModifierBuilder.INSTANCE.register(SkullsModifier::new, "skulls");
+        }
     }
 }
